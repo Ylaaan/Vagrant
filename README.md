@@ -1,2 +1,2 @@
 # Vagrant
-Collection of usefull VagrantFiles and Scripts
+A collection of usefull VagrantFiles and Scripts
