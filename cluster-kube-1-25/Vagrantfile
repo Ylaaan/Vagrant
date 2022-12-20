@@ -1,0 +1,41 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+MASTER_IP       = "192.168.1.200"
+NODE_01_IP      = "192.168.1.201"
+NODE_02_IP      = "192.168.1.202"
+NODE_03_IP      = "192.168.1.203"
+NFS_IP          = "192.168.1.210"
+
+Vagrant.configure("2") do |config|
+    config.vm.box = "gadgieOps/k8s-ubuntu20.04"
+    config.vm.box_version = "0.1.5"
+    boxes = [
+        { :name => "nfs", :ip => NFS_IP, :cpus => 1, :memory => 2048, :type => "nfs" },        
+        { :name => "master",  :ip => MASTER_IP,  :cpus => 2, :memory => 2048, :type => "master" },
+        { :name => "node-01", :ip => NODE_01_IP, :cpus => 1, :memory => 2048, :type => "node"},
+        { :name => "node-02", :ip => NODE_02_IP, :cpus => 1, :memory => 2048, :type => "node" },
+        { :name => "node-03", :ip => NODE_03_IP, :cpus => 1, :memory => 2048, :type => "node" },
+      ]
+    boxes.each do |opts|
+        config.vm.define opts[:name] do |box|
+            box.vm.hostname = opts[:name]
+            box.vm.network :public_network, ip: opts[:ip]
+            box.vm.provider "virtualbox" do |vb|
+                vb.cpus = opts[:cpus]
+                vb.memory = opts[:memory]
+            end
+            if opts[:type] == "master" then
+                box.vm.provision "shell", path:"./common.sh"
+                box.vm.provision "shell", path:"./master.sh"
+            end
+            if opts[:type] == "node" then
+                box.vm.provision "shell", path:"./common.sh"
+                box.vm.provision "shell", path:"./node.sh"
+            end
+            if opts[:type] == "nfs" then
+                box.vm.provision "shell", path:"./nfs.sh"
+            end
+        end
+    end
+end
