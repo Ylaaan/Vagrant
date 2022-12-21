@@ -1,0 +1,3 @@
+# Ignorer le dossier Vagrant
+/cluster-kube/.vagrant
+/cluster-kube-1-25/.vagrant
