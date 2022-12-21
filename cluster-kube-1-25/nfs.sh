@@ -3,11 +3,11 @@ sudo resolvectl dns eth0 8.8.8.8
 
 # set host file
 sudo tee /etc/hosts<<EOF
-192.168.1.200 master
-192.168.1.201 node-01
-192.168.1.202 node-02
-192.168.1.203 node-03
-192.168.1.210 nfs
+172.16.8.10 master
+172.16.8.11 node-01
+172.16.8.12 node-02
+172.16.8.13 node-03
+172.16.8.20 nfs
 EOF
 
 # Install required package
@@ -23,7 +23,7 @@ sudo chown nobody:nogroup /mnt/nfs4/shared
 sudo chmod 777 /mnt/nfs4/shared
 
 sudo tee /etc/exports<<EOF
-/mnt/nfs4/shared 192.168.1.0/24(rw,sync,no_subtree_check)
+/mnt/nfs4/shared 172.16.1.0/24(rw,sync,no_subtree_check)
 EOF
 sudo exportfs -a
 sudo systemctl restart nfs-kernel-server
