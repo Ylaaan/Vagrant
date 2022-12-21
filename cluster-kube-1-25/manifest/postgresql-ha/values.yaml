@@ -1,0 +1,7 @@
+global.storageClass: "nfs-client"
+
+global.postgresql.username: "postgresql"
+global.postgresql.password: "postgresql"
+
+global.pgpool.adminUsername: "pgpool"
+global.pgpool.adminPassword: "pgpool"

@@ -18,5 +18,13 @@ sudo tee /etc/hosts<<EOF
 172.16.8.20 nfs
 EOF
 
+# install nfs client
 sudo apt-get update
 sudo apt-get install -y nfs-common
+
+# alias
+sudo tee /home/vagrant/.bash_aliases<<EOF
+#kubectl aliases
+alias kube='kubectl '
+alias k='kubectl '
+EOF

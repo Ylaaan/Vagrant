@@ -5,7 +5,7 @@ sudo KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply -f https://github.com/w
 mkdir -p /home/vagrant/.kube
 sudo cp -i /etc/kubernetes/admin.conf /home/vagrant/.kube/config
 sudo chown vagrant:vagrant /home/vagrant/.kube/config
-sudo KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply -f /vagrant/manifest/nfs
+sudo KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply -f /vagrant/manifest/nfs #apply nfs manifests
 sudo kubeadm token create --print-join-command | tee /vagrant/join_command.sh
 kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl > /dev/null
 
@@ -16,3 +16,5 @@ sudo apt-get update
 sudo apt-get install helm
 
 helm repo add bitnami https://charts.bitnami.com/bitnami
+
+#helm install -f /vagrant/manifest/postgresql-ha/values.yaml bitnami/postgresql-ha
