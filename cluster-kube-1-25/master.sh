@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo kubeadm init --pod-network-cidr 192.168.0.0/16 --apiserver-advertise-address 192.168.1.200 --ignore-preflight-errors=NumCPU
+sudo kubeadm init --pod-network-cidr 192.168.0.0/16 --apiserver-advertise-address 172.16.8.10 --ignore-preflight-errors=NumCPU
 sudo KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
 mkdir -p /home/vagrant/.kube
 sudo cp -i /etc/kubernetes/admin.conf /home/vagrant/.kube/config
